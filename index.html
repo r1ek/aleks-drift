@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Drift Bracket</title>
+
+    <!-- Tailwind (for classes like bg-gray-800, etc.) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- React + ReactDOM (UMD builds expose globals) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel to transpile JSX in the browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-gray-900">
+    <div id="root"></div>
+
+    <!-- Your JSX app -->
+    <script type="text/babel" src="drift.jsx"></script>
+
+    <!-- Mount after drift.jsx defines App() in global scope -->
+    <script type="text/babel">
+      const rootEl = document.getElementById("root");
+      if (typeof App !== "undefined") {
+        ReactDOM.createRoot(rootEl).render(<App />);
+      } else {
+        rootEl.innerHTML =
+          '<div class="text-white p-4">Could not find global <code>App</code>. Make sure drift.jsx defines <code>function App() { ... }</code> (no imports/exports).</div>';
+      }
+    </script>
+  </body>
+</html>
