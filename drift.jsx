@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// Using React UMD globals (no imports/exports)
+const { useState } = React;
 
 const initialPlayers = Array.from({ length: 16 }, (_, i) => ({
   id: i + 1,
@@ -6,7 +7,7 @@ const initialPlayers = Array.from({ length: 16 }, (_, i) => ({
   score: 0,
 }));
 
-export default function App() {
+function App() {
   const [players, setPlayers] = useState(initialPlayers);
   const [bracket, setBracket] = useState({});
   const [tournamentStarted, setTournamentStarted] = useState(false);
@@ -124,6 +125,7 @@ export default function App() {
                 value={player.name}
                 onChange={(e) => updatePlayer(player.id, "name", e.target.value)}
                 className="p-2 rounded bg-gray-800 text-white flex-1 w-full sm:w-auto"
+                placeholder={`Sõitja ${player.id}`}
               />
               <input
                 type="number"
@@ -131,7 +133,9 @@ export default function App() {
                 onChange={(e) =>
                   updatePlayer(player.id, "score", Number(e.target.value))
                 }
-                className="p-2 rounded bg-gray-800 text-white w-full sm:w-20"
+                className="p-2 rounded bg-gray-800 text-white w-full sm:w-24"
+                placeholder="Punktid"
+                min="0"
               />
             </div>
           ))}
